@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="김예현 프로필">
+  <title>김예현 | Profile</title>
+
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #6f6f6a;
+      --line: #deded9;
+      --accent: #111111;
+      --nav-height: 72px;
+      --max-width: 1180px;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 24px);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "SF Pro Text", "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* Navigation */
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      background: rgba(247, 247, 245, 0.88);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+    }
+
+    .nav-inner {
+      width: min(var(--max-width), calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
+      padding: 0 13px;
+      color: #555550;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: #e9e9e5;
+    }
+
+    .nav-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+    }
+
+    .nav-toggle span,
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 4px auto;
+      background: var(--text);
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    /* Global */
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    section {
+      position: relative;
+      padding: 120px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.34fr 1fr;
+      gap: 50px;
+      margin-bottom: 56px;
+    }
+
+    .section-number {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      font-weight: 700;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Hero */
+    #home {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: calc(var(--nav-height) + 80px);
+      padding-bottom: 80px;
+      border-bottom: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: 70px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-name {
+      font-size: clamp(64px, 11vw, 148px);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      font-weight: 750;
+      word-break: keep-all;
+    }
+
+    .hero-major {
+      margin-top: 38px;
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-quote {
+      margin-top: 22px;
+      max-width: 660px;
+      font-size: clamp(20px, 2.4vw, 30px);
+      line-height: 1.4;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-side {
+      justify-self: end;
+      width: min(100%, 300px);
+    }
+
+    .profile-placeholder {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #eeeeea;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .profile-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hero-side-note {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card-label {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-size: 21px;
+      line-height: 1.35;
+      letter-spacing: -0.04em;
+    }
+
+    .card p {
+      margin-top: 10px;
+      color: #4f4f4a;
+      font-size: 14px;
+    }
+
+    .plain-list {
+      list-style: none;
+    }
+
+    .plain-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+
+    .plain-list li:first-child {
+      padding-top: 0;
+    }
+
+    .plain-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    /* Education */
+    .education-block {
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .education-block:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .education-school {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.045em;
+    }
+
+    .education-major {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Experience */
+    .timeline {
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 50px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-meta {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .timeline-title {
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .timeline-desc {
+      margin-top: 8px;
+      color: #555550;
+      font-size: 14px;
+    }
+
+    /* Activities */
+    .activity-group {
+      margin-bottom: 55px;
+    }
+
+    .activity-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .activity-group-title {
+      margin-bottom: 18px;
+      font-size: 19px;
+      letter-spacing: -0.03em;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .activity-item {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font-size: 15px;
+    }
+
+    /* Sports */
+    .sport-number {
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 750;
+    }
+
+    .sport-title {
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* Certifications */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .cert {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .contact-card {
+      display: block;
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 650;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .hero-side {
+        justify-self: start;
+        width: min(280px, 70vw);
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .grid-3,
+      .cert-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      :root {
+        --nav-height: 64px;
+      }
+
+      .nav-inner {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(var(--nav-height) + 8px);
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        justify-content: flex-start;
+        height: 44px;
+      }
+
+      section {
+        padding: 85px 0;
+      }
+
+      #home {
+        min-height: auto;
+        padding-top: calc(var(--nav-height) + 70px);
+      }
+
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .hero-name {
+        font-size: clamp(58px, 20vw, 100px);
+      }
+
+      .grid-2,
+      .grid-3,
+      .activity-grid,
+      .cert-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .education-school {
+        font-size: 25px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed Navigation -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home">김예현</a>
+
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <nav aria-label="주요 메뉴">
+        <ul class="nav-links">
+          <li><a href="#home">Profile</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#sports">Sports</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Profile -->
+    <section id="home" aria-labelledby="profile-title">
+      <div class="container hero reveal">
+        <div>
+          <div class="eyebrow">Profile</div>
+          <h1 id="profile-title" class="hero-name">김예현</h1>
+          <p class="hero-major">서경대학교 군사학과 · 스포츠앤테크놀로지학과</p>
+          <p class="hero-quote">도전하는 것을 두려워하지 않고, 책임지는 것을 피하지 않습니다.</p>
+        </div>
+
+        <div class="hero-side">
+          <div class="profile-placeholder" aria-label="프로필 이미지">
+            <img src="https://stickershop.line-scdn.net/stickershop/v1/product/26936188/LINEStorePC/main.png?v=1" alt="김예현 프로필 이미지" onerror="this.onerror=null; this.src='profile-photo.png';">
+          </div>
+          <p class="hero-side-note">프로필 이미지</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">01 / About</div>
+          <div>
+            <h2 id="about-title" class="section-title">자기소개</h2>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal">
+          <article class="card">
+            <div class="card-label">Interests</div>
+            <h3>관심 있는 분야</h3>
+            <ul class="plain-list" style="margin-top: 20px;">
+              <li>운동</li>
+              <li>군사학</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-label">Strengths</div>
+            <h3>나의 강점 또는 잘하는 것</h3>
+            <ul class="plain-list" style="margin-top: 20px;">
+              <li>계획성</li>
+              <li>실천력</li>
+              <li>꾸준함</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-label">Career</div>
+            <h3>희망 진로·직무</h3>
+            <ul class="plain-list" style="margin-top: 20px;">
+              <li>군인</li>
+              <li>스포츠지도</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" aria-labelledby="education-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">02 / Education</div>
+          <div>
+            <h2 id="education-title" class="section-title">학력</h2>
+          </div>
+        </div>
+
+        <div class="education-block reveal">
+          <h3 class="education-school">서경대학교</h3>
+          <p class="education-major">군사학과 / 스포츠앤테크놀로지학과(복수전공)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">03 / Experience</div>
+          <div>
+            <h2 id="experience-title" class="section-title">경력</h2>
+          </div>
+        </div>
+
+        <div class="timeline reveal">
+          <article class="timeline-item">
+            <div class="timeline-meta">23.12 ~ 25.10</div>
+            <div>
+              <h3 class="timeline-title">프렌즈스크린 광화문</h3>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-meta">3-1학기</div>
+            <div>
+              <h3 class="timeline-title">군사학과 행정실 근로</h3>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-meta">경험</div>
+            <div>
+              <h3 class="timeline-title">국립재활원 움직임 분석 연구 피실험자</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities -->
+    <section id="activities" aria-labelledby="activities-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">04 / Activities</div>
+          <div>
+            <h2 id="activities-title" class="section-title">교내 활동</h2>
+          </div>
+        </div>
+
+        <div class="activity-group reveal">
+          <h3 class="activity-group-title">서경대학교 군사학과</h3>
+          <div class="activity-grid">
+            <div class="activity-item">피트니스 동아리 ‘VS’</div>
+            <div class="activity-item">군사학과 1학년 과대표</div>
+            <div class="activity-item">군사학과 2학년 학습도우미</div>
+            <div class="activity-item">군사학과 3학년 학습도우미 총괄</div>
+            <div class="activity-item">군사학과 제17대 학생회 두잇 문화차장</div>
+            <div class="activity-item">군사학과 제18대 학생회 화랑 문화부장</div>
+          </div>
+        </div>
+
+        <div class="activity-group reveal">
+          <h3 class="activity-group-title">서경대학교 중앙밴드동아리 ‘워커스’</h3>
+          <div class="activity-grid">
+            <div class="activity-item">2024년도 부회장</div>
+            <div class="activity-item">2025년도 회장</div>
+            <div class="activity-item">2026년도 회장</div>
+          </div>
+        </div>
+
+        <div class="activity-group reveal">
+          <h3 class="activity-group-title">학군단</h3>
+          <div class="activity-grid">
+            <div class="activity-item">하계입영훈련 중대장 후보생</div>
+            <div class="activity-item">교내 부대대장 후보생</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sports -->
+    <section id="sports" aria-labelledby="sports-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">05 / Sports</div>
+          <div>
+            <h2 id="sports-title" class="section-title">스포츠 활동</h2>
+            <p class="section-intro">운동과 스포츠 활동에 관한 경험입니다.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal">
+          <article class="card">
+            <div class="sport-number">2단</div>
+            <div class="sport-title">태권도 공인 2단</div>
+          </article>
+
+          <article class="card">
+            <div class="sport-number">2년</div>
+            <div class="sport-title">주짓수</div>
+          </article>
+
+          <article class="card">
+            <div class="sport-number">Hyrox</div>
+            <div class="sport-title">인천 오픈 더블 참가</div>
+          </article>
+
+          <article class="card">
+            <div class="sport-number">42’30“</div>
+            <div class="sport-title">10K 마라톤</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" aria-labelledby="certifications-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">06 / Certifications</div>
+          <div>
+            <h2 id="certifications-title" class="section-title">자격</h2>
+          </div>
+        </div>
+
+        <div class="cert-grid reveal">
+          <div class="cert">운전면허 2종보통</div>
+          <div class="cert">태권도 2단</div>
+          <div class="cert">PC활용능력(PCT) 자격증</div>
+          <div class="cert">운동처방사 1급</div>
+          <div class="cert">스쿠버다이빙 오픈워터</div>
+          <div class="cert">골프데이터분석가</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-number">07 / Contact</div>
+          <div>
+            <h2 id="contact-title" class="section-title">연락처</h2>
+          </div>
+        </div>
+
+        <div class="contact-grid reveal">
+          <a class="contact-card" href="mailto:dPgus2119@gamil.com">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">dPgus2119@gamil.com</div>
+          </a>
+
+          <a class="contact-card" href="https://www.instagram.com/xexyun_/" target="_blank" rel="noopener noreferrer">
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">@xexyun_</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      김예현
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const nav = document.querySelector(".site-nav");
+      const navLinks = document.querySelector(".nav-links");
+      const navToggle = document.querySelector(".nav-toggle");
+      const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+      const sections = [...document.querySelectorAll("main section[id]")];
+      const reveals = [...document.querySelectorAll(".reveal")];
+
+      // Mobile navigation
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+      });
+
+      // Anchor navigation and mobile menu closing
+      links.forEach(link => {
+        link.addEventListener("click", event => {
+          const targetId = link.getAttribute("href");
+          const target = document.querySelector(targetId);
+
+          if (target) {
+            event.preventDefault();
+
+            const navHeight = nav.offsetHeight;
+            const targetTop =
+              target.getBoundingClientRect().top +
+              window.scrollY -
+              navHeight -
+              18;
+
+            window.scrollTo({
+              top: targetTop,
+              behavior: "smooth"
+            });
+
+            navLinks.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "메뉴 열기");
+
+            history.replaceState(null, "", targetId);
+          }
+        });
+      });
+
+      // Active navigation state
+      const observerOptions = {
+        root: null,
+        rootMargin: `-${nav.offsetHeight + 30}px 0px -55% 0px`,
+        threshold: 0
+      };
+
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          links.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`
+            );
+          });
+        });
+      }, observerOptions);
+
+      sections.forEach(section => sectionObserver.observe(section));
+
+      // Scroll reveal
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(element => revealObserver.observe(element));
+    })();
+  </script>
+</body>
+</html>
